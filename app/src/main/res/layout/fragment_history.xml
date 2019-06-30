@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HistoryFragment">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+
+        android:id="@+id/imMorning"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@mipmap/bo3weather_backgroudChieu1"
+        />
+    <EditText
+        android:id="@+id/edtSearch"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:hint="position"
+        android:textSize="30sp"
+        android:backgroundTint="#FFF"
+        android:background="#FFF"
+        />
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/edtSearch"
+        android:id="@+id/lvHistory"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="30dp"
+        android:text="History"
+        android:textColor="#125715"
+        android:background="#2289DA"
+        />
+    <ListView
+
+        android:layout_below="@+id/lvHistory"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
+
+</RelativeLayout>
+</FrameLayout>

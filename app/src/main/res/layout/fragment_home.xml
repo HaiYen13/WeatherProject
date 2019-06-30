@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeFragment">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@mipmap/bo2weather_backgroudToi3"
+        />
+
+    <TextClock
+        android:textColor="#FFF"
+        android:id="@+id/tcDateTime"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Date and time now"
+        android:gravity="center"
+        android:textSize="40sp"
+
+        />
+    <TextView
+        android:id="@+id/tvPosition"
+        android:textColor="#FFF"
+        android:textSize="40sp"
+        android:text="London UK"
+        android:layout_below="@+id/tcDateTime"
+
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        />
+    <ImageView
+        android:id="@+id/imNowWeather"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="130dp"
+        android:layout_width="129dp"
+        android:layout_height="79dp"
+        android:layout_below="@+id/tvPosition"
+        android:src="@mipmap/thunderstorm"
+        />
+    <TextView
+        android:layout_alignLeft="@+id/imNowWeather"
+
+        android:id="@+id/tvTemp"
+        android:layout_below="@+id/imNowWeather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Temperature"
+        android:textSize="30sp"
+        android:textColor="#FFF"
+        />
+    <LinearLayout
+        android:layout_below="@+id/tvTemp"
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="0dp">
+
+    <android.support.v4.widget.Space
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_below="@+id/tvTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@mipmap/pressure" />
+
+        <TextView
+            android:id="@+id/tvPres"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1085 hpa"
+            android:textColor="#FFF"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+    <android.support.v4.widget.Space
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:src="@mipmap/humidity" />
+
+        <TextView
+            android:id="@+id/tvHumi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 80%"
+            android:textColor="#FFF"
+            android:textSize="20dp" />
+    </LinearLayout>
+        <android.support.v4.widget.Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/wind" />
+
+            <TextView
+                android:id="@+id/tvWind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4 m/s"
+                android:textColor="#FFF"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+        <android.support.v4.widget.Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+    <LinearLayout
+
+        android:id="@+id/linearLayout5DayNext"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="60dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="5 days next"
+            android:textColor="#FFF"
+            android:textSize="25sp"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="#FFF"
+            />
+            <LinearLayout
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="SAT"
+                    android:textColor="#FFF" />
+
+                <ImageView
+                    android:layout_width="67dp"
+                    android:layout_height="27dp"
+                    android:src="@mipmap/sun" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="30'C"
+                    android:textColor="#FFF" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="SAT"
+                    android:textColor="#FFF" />
+
+                <ImageView
+                    android:layout_width="67dp"
+                    android:layout_height="27dp"
+                    android:src="@mipmap/mist" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="30'C"
+                    android:textColor="#FFF" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="SAT"
+                    android:textColor="#FFF" />
+
+                <ImageView
+                    android:layout_width="67dp"
+                    android:layout_height="27dp"
+                    android:src="@mipmap/scratteredclouds" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="30'C"
+                    android:textColor="#FFF" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="SAT"
+                    android:textColor="#FFF" />
+
+                <ImageView
+                    android:layout_width="67dp"
+                    android:layout_height="27dp"
+                    android:src="@mipmap/brokencloud" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="30'C"
+                    android:textColor="#FFF" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="SAT"
+                    android:textColor="#FFF" />
+
+                <ImageView
+                    android:layout_width="67dp"
+                    android:layout_height="27dp"
+                    android:src="@mipmap/thunderstorm" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="30'C"
+                    android:textColor="#FFF" />
+            </LinearLayout>
+        </LinearLayout>
+        </LinearLayout>
+
+
+
+</RelativeLayout>
+</FrameLayout>
