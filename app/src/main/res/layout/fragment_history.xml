@@ -14,7 +14,7 @@
         android:id="@+id/imMorning"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@mipmap/bo3weather_backgroudChieu1"
+        android:src="@mipmap/bo3weather_backgroundsang"
         />
     <EditText
         android:id="@+id/edtSearch"

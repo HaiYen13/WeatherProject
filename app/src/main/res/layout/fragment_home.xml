@@ -11,7 +11,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@mipmap/bo2weather_backgroudToi3"
+        android:src="@mipmap/bo2weather_backgroundtoi3"
         />
 
     <TextClock
