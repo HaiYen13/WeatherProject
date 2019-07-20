@@ -4,18 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-<androidx.viewpager.widget.ViewPager
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/mViewPager"
-    >
-    <androidx.viewpager.widget.PagerTabStrip
+
+    tools:context=".activity.MainActivity">
+
+    <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:id="@+id/mViewPager"
+        android:layout_height="match_parent">
 
-    </androidx.viewpager.widget.PagerTabStrip>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:background="#797EA8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></com.google.android.material.tabs.TabLayout>
+    </androidx.viewpager.widget.ViewPager>
 
-
-</androidx.viewpager.widget.ViewPager>
 </LinearLayout>

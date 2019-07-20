@@ -1,10 +1,5 @@
 <resources>
-    <string name="app_name">WeatherApp</string>
-    <string name="title_activity_chart">ChartActivity</string>
-    <string name="title_activity_chart_">Chart_Activity</string>
-    <string name="title_activity_char">CharActivity</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="google_maps_API_key">AIzaSyCVx88dSdctn4nPTsv0f83n3BdyneF9JoM</string>
+    <string name="app_name" ranslatable="false">Android Places Demo</string>
 </resources>
+
