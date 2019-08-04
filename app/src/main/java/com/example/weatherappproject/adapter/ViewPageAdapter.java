@@ -8,7 +8,6 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 
 public class ViewPageAdapter extends FragmentPagerAdapter {
-
     private ArrayList<Fragment> mListFragment;
     public ViewPageAdapter(FragmentManager fm, ArrayList<Fragment> mListFragment) {
         super(fm);
@@ -16,6 +15,7 @@ public class ViewPageAdapter extends FragmentPagerAdapter {
     }
 
     @Override
+
     public Fragment getItem(int position) {
         return this.mListFragment.get(position);
     }
@@ -31,14 +31,11 @@ public class ViewPageAdapter extends FragmentPagerAdapter {
         if (position == 0) {
             return "Home";
         } else if (position == 1) {
-            return "Error Page";
-        } else if(position == 2){
             return "Forecast";
-        }else if(position == 3) {
+        }else if(position == 2) {
             return "History";
         }else {
             return "Map";
         }
     }
-
 }

@@ -1,6 +1,5 @@
 package com.example.weatherappproject.activity;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +20,9 @@ public class HistoryFragment extends Fragment {
     private ListView mLvData;
     private HistoryAdapter mAdapter;
     private ArrayList<History> mListHistory;
-    SharedPreferences sharedPreferences;
+
     private SQLHelper sqlHelper;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,16 +30,18 @@ public class HistoryFragment extends Fragment {
 
 
     @Override
-    public View onCreateView( LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_history, container, false);
         mLvData = v.findViewById(R.id.mLvHis);
-        setdata();
+        setdata();  //Lấy dữ liệu từ SQL cho mListHistory;
         mAdapter = new HistoryAdapter(mListHistory, getActivity());
         mLvData.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
         return v;
     }
 
+
+    //Phương thức lấy data History từ Database
     public void setdata(){
         sqlHelper = new SQLHelper(getActivity());
         mListHistory = sqlHelper.getArrayHistory();

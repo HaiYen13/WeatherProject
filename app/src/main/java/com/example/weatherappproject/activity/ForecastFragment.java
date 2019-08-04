@@ -5,11 +5,9 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -42,18 +40,20 @@ import java.util.Date;
 import java.util.List;
 
 public class ForecastFragment extends Fragment implements OnChartValueSelectedListener {
-
+    private static String TAG = "ForecastFragment";
+    private static int COUNT = 5;
 
     //Đối tượng biểu đồ combined
     private CombinedChart mChart;
 
-    //
+    //Tên thành phố
     private TextView tvName;
 
-    private Button btnReload;
+
     SharedPreferences sharedPreferences;
 
     public ForecastFragment() {
+
     }
 
     @Override
@@ -64,14 +64,14 @@ public class ForecastFragment extends Fragment implements OnChartValueSelectedLi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        sharedPreferences = getActivity().getSharedPreferences("search", Context.MODE_PRIVATE);
+
         View v = inflater.inflate(R.layout.fragment_forecast, container, false);
 
 
         tvName = v.findViewById(R.id.tvName);
 
         mChart = v.findViewById(R.id.combinedChart);
+        //Todo: Set up cho CombinedChart
         mChart.getDescription().setEnabled(false);
         mChart.setBackgroundColor(Color.WHITE);
         mChart.setDrawGridBackground(false);
@@ -79,14 +79,18 @@ public class ForecastFragment extends Fragment implements OnChartValueSelectedLi
         mChart.setHighlightFullBarEnabled(false);
         mChart.setOnChartValueSelectedListener(this);
 
+        //Todo: Tạo đối tượng sharePreference để lấy tên thành phố khi ta search ở MainActivity
+        sharedPreferences = getActivity().getSharedPreferences("search", Context.MODE_PRIVATE);
 
 
-        new HttpWeatherCity().execute(sharedPreferences.getString("name",""));
-        Log.d("getForecast", sharedPreferences.getString("name",""));
-        tvName.setText("The name of city: " + sharedPreferences.getString("name",""));
+        //Todo: Set up tên thành phố, và get dữ liệu
+        tvName.setText("City: " + sharedPreferences.getString("name","Hanoi"));
+        new HttpWeatherCity().execute(sharedPreferences.getString("id","1581130"));
+
         return v;
     }
 
+    //Todo: Các hàm implement bắt buộc (không sử dụng)
     @Override
     public void onValueSelected(Entry e, Highlight h) {
 //        Toast.makeText(this, "Value: "
@@ -103,7 +107,9 @@ public class ForecastFragment extends Fragment implements OnChartValueSelectedLi
 
     }
 
-    //Format parameter "dt_txt" JSON from API
+
+
+    //Phương thức để định dạng JSON "dt_txt" về calendar
     public static Calendar getTime(String time){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
 
@@ -112,88 +118,120 @@ public class ForecastFragment extends Fragment implements OnChartValueSelectedLi
             Date date = sdf.parse(time);
             calendar = Calendar.getInstance();
             calendar.setTime(date);
-//            System.out.println(calendar.get(Calendar.DAY_OF_MONTH));
-//            System.out.println(calendar.get(Calendar.MONTH)+1);
-//            System.out.println(calendar.get(Calendar.YEAR));
-//            System.out.println(calendar.get(Calendar.HOUR));
-//            System.out.println(calendar.get(Calendar.MINUTE));
-//            System.out.println(calendar.get(Calendar.SECOND));
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return calendar;
     }
 
-    public class HttpWeatherCity extends AsyncTask<String, Void , String>{
+    //Tạo biểu đồ đường Line Chart
+    private LineData generateLineChart(ArrayList<Weather>arr)  {
 
-        HttpRequest request = new HttpRequest();
-        ArrayList<Weather> arr = new ArrayList<>();
+        LineData d = new LineData();
+
+        int data[] = new int [arr.size()];
+        for(int i = 0; i < arr.size(); i++){
+            data[i] = Integer.parseInt(arr.get(i).getTemperature());
+        }
+
+        ArrayList<Entry> entries = new ArrayList<Entry>();
+
+        for (int index = 0; index < COUNT; index++) {
+            entries.add(new Entry(index, data[index]));
+        }
+
+        LineDataSet set = new LineDataSet(entries, "Temperature");
+        set.setColor(Color.RED);
+        set.setLineWidth(2.5f);
+        set.setCircleColor(Color.RED);
+        set.setCircleRadius(5f);
+        set.setFillColor(Color.RED);
+        set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        set.setDrawValues(true);
+        set.setValueTextSize(10f);
+        set.setValueTextColor(Color.RED);
+
+        set.setAxisDependency(YAxis.AxisDependency.LEFT);
+        d.addDataSet(set);
+
+        return d;
+    }
+
+    public class HttpWeatherCity extends AsyncTask<String, Void , String> {
+
+
+        HttpRequest request = new HttpRequest();    //Đối tượng để thực hiện kết nối và lấy dữ liệu
+        ArrayList<Weather> arr = new ArrayList<>();     //mảng Weather trong 5 ngày /3 giờ
+
         HttpWeatherCity(){
         }
 
         @Override
         protected String doInBackground(String... params) {
-            String url = "https://api.openweathermap.org/data/2.5/forecast?q="+params[0]+"&units=metric&appid=211ff006de9aba9ddd122331f87cdf8b";
+            //Todo: Đường dẫn lấy dữ liệu dự báo trong 5 ngày/ 3 giờ
+            String url = "https://api.openweathermap.org/data/2.5/forecast?id="+params[0]+"&units=metric&appid=211ff006de9aba9ddd122331f87cdf8b";
+            // Nhận kết quả trả về từ đường dẫn
             String response = request.sendGet(url);
-            System.out.println(response);
+
             return response;
         }
 
         @Override
         protected void onPostExecute(String response){
+
+            //TODO: Xử lí JSON
             try {
                 JSONObject jsonObject = new JSONObject(response);
 
-                //Todo: Get orther para
+                //Todo: Lấy dữ liệu
                 JSONArray fullJson = jsonObject.getJSONArray("list");
                 for(int i = 0; i < fullJson.length(); i++){
 
                     Weather weather = new Weather();
 
-                    //Todo: Get para city
+                    //Todo: Lấy tên thành phố
                     JSONObject cityJson = jsonObject.getJSONObject("city");
+                    //Todo: Set text tên thành phố
                     weather.setCity(cityJson.getString("name"));
 
                     JSONObject listJson = fullJson.getJSONObject(i);
                     JSONObject mainJson = listJson.getJSONObject("main");
 
 
-                    //Todo: Get para temperature (set Celcius)
+                    //Todo: Lấy nhiệt độ (Đơn vị: Celcius)
                     Double celcius = Double.parseDouble(mainJson.getString("temp"));
                     weather.setTemperature(Math.round(celcius)+"");
 //                    System.out.println(Math.round(celcius)+ "°C");
 
 
-                    //Todo: Get para pressure
+                    //Todo: Lấy áp suất (Đơn vị: hPa)
                     weather.setPressure(mainJson.getString("pressure"));
 //                    System.out.println(mainJson.getString("pressure"));
 
 
-                    //Todo: Get para hudimity
+                    //Todo: Lấy độ ẩm (Đơn vị: %)
                     weather.setHumidity(mainJson.getString("humidity"));
 //                    System.out.println(mainJson.getString("humidity"));
 
 
-                    //Todo: Get parameter rain (mm) forecast weather (if not parameter rain (=0))
+                    //Todo: Lấy lượng mưa (mm) (nếu không có trong responese (rain=0))
                     try {
                         weather.setRain(listJson.getJSONObject("rain").getString("3h"));
-                        System.out.println(listJson.getJSONObject("rain").getString("3h"));
+//                        System.out.println(listJson.getJSONObject("rain").getString("3h"));
                     }
                     catch(JSONException e){
                         weather.setRain(0+"");
 //                        System.out.println(0);
                     }
 
-//                    //Todo: Get parameters date and time forecast weather
+//                    //Todo: Lấy date và time
                     String date = listJson.getString("dt_txt");
                     Calendar c = getTime(date);
                     weather.setDate(c.get(Calendar.DAY_OF_MONTH)+"/"+c.get(Calendar.MONTH)+1);
-//                  System.out.println(c.get(Calendar.DAY_OF_MONTH)+"/"+c.get(Calendar.MONTH)+1);
 
                     weather.setTime(c.get(Calendar.HOUR_OF_DAY)+ ":"+c.get(Calendar.MINUTE));
-//                  System.out.println(c.get(Calendar.HOUR)+ ":"+c.get(Calendar.MINUTE));
 //
-//                    System.out.println(weather.toString());
+                    //Todo: Thêm weather vào mảng weather
                     arr.add(weather);
                 }
             } catch (JSONException e) {
@@ -214,8 +252,13 @@ public class ForecastFragment extends Fragment implements OnChartValueSelectedLi
 
             //Tạo các nhãn cho trục hoành
             final List<String> xLabel = new ArrayList<>();
-            for(int i = 0; i < 5; i++){
-                xLabel.add(arr.get(i).getTime());
+            for(int i = 0; i < COUNT; i++){
+                //Todo: Xử lí số liệu 12h
+                if(arr.get(i).getTime().equals("0:0") && arr.get(i+1).getTime().equals("15:0")){
+                    xLabel.add("12:0");
+                }
+                else
+                    xLabel.add(arr.get(i).getTime());
             }
 
             //Tạo trục hoành
@@ -237,43 +280,9 @@ public class ForecastFragment extends Fragment implements OnChartValueSelectedLi
             data.setData(generateLineChart(arr));
 
             xAxis.setAxisMaximum(data.getXMax() + 0.25f);
-
             mChart.setData(data);
             mChart.invalidate();
         }
     }
-    //Tạo biểu đồ đường Line Chart
-    private LineData generateLineChart(ArrayList<Weather>arr)  {
 
-        LineData d = new LineData();
-
-        int data[] = new int [arr.size()];
-        for(int i = 0; i < arr.size(); i++){
-            data[i] = Integer.parseInt(arr.get(i).getTemperature());
-        }
-
-        ArrayList<Entry> entries = new ArrayList<Entry>();
-
-        for (int index = 0; index < 5; index++) {
-            entries.add(new Entry(index, data[index]));
-        }
-
-        LineDataSet set = new LineDataSet(entries, "Temperature");
-        set.setColor(Color.GREEN);
-        set.setLineWidth(2.5f);
-        set.setCircleColor(Color.GREEN);
-        set.setCircleRadius(5f);
-        set.setFillColor(Color.GREEN);
-        set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-        set.setDrawValues(true);
-        set.setValueTextSize(10f);
-        set.setValueTextColor(Color.GREEN);
-
-        set.setAxisDependency(YAxis.AxisDependency.LEFT);
-        d.addDataSet(set);
-
-        return d;
-    }
 }
-
-

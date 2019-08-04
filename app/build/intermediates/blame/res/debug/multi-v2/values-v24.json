@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\This PC\\Desktop\\WeatherApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
+            "outputFile": "C:\\Users\\This PC\\Desktop\\WeatherProject\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
             "map": [
                 {
                     "source": "C:\\Users\\This PC\\.gradle\\caches\\transforms-2\\files-2.1\\9cdebd9cada7acbf9676f30348c2d429\\res\\values-v24\\values-v24.xml",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\This PC\\.gradle\\caches\\transforms-2\\files-2.1\\034423d7723178a3e34c151f360847cc\\res\\values-v24\\values-v24.xml",
+                    "source": "C:\\Users\\This PC\\.gradle\\caches\\transforms-2\\files-2.1\\6d1d2fcc11f71acddc6588439b5714a4\\res\\values-v24\\values-v24.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",

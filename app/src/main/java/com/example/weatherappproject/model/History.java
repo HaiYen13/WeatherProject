@@ -1,7 +1,6 @@
 package com.example.weatherappproject.model;
 
 public class History {
-
     private String name_city;
     private String date_time;
     private String img;
@@ -16,6 +15,7 @@ public class History {
     }
 
     public History(String name_city, String date_time, String img, String description, int temp, int pressure, int humidity) {
+
         this.name_city = name_city;
         this.date_time = date_time;
         this.img = img;
@@ -82,4 +82,19 @@ public class History {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "History{" +
+                "name_city='" + name_city + '\'' +
+                ", date_time='" + date_time + '\'' +
+                ", img='" + img + '\'' +
+                ", description='" + description + '\'' +
+                ", temp=" + temp +
+                ", pressure=" + pressure +
+                ", humidity=" + humidity +
+                '}';
+    }
+
+
 }

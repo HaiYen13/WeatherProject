@@ -1,10 +1,7 @@
-#Sat Jul 20 17:11:37 ICT 2019
-path.2=classes2.dex
+#Sun Aug 04 20:59:46 ICT 2019
+base.0=C\:\\Users\\This PC\\Desktop\\WeatherProject\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\out
 path.1=classes.dex
-path.0=classes.dex
-renamed.2=classes3.dex
 renamed.1=classes2.dex
+path.0=classes.dex
 renamed.0=classes.dex
-base.2=C\:\\Users\\This PC\\Desktop\\WeatherApp\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\out
-base.1=C\:\\Users\\This PC\\Desktop\\WeatherApp\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\out
-base.0=C\:\\Users\\This PC\\Desktop\\WeatherApp\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\out
+base.1=C\:\\Users\\This PC\\Desktop\\WeatherProject\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\out

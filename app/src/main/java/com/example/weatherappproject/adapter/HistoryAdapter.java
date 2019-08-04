@@ -19,6 +19,7 @@ public class HistoryAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mLayoutInflator;
 
+
     public HistoryAdapter(ArrayList<History> mListWeather, Context mContext) {
         this.mListHistory = mListWeather;
         this.mContext = mContext;
@@ -41,7 +42,7 @@ public class HistoryAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View view, ViewGroup parent) {
+    public View getView(final int position, View view, ViewGroup parent) {
         if(view == null){
             view = mLayoutInflator.inflate(R.layout.history_item, null);
         }
@@ -104,6 +105,7 @@ public class HistoryAdapter extends BaseAdapter {
 
         TextView tvTime = view.findViewById(R.id.tvTime);
         tvTime.setText(mListHistory.get(position).getDate_time());
+
 
         return view;
     }
